@@ -63,7 +63,7 @@ async def change_speed():
         the_connection.target_system,
         the_connection.target_component,
         mavutil.mavlink.MAV_CMD_DO_CHANGE_SPEED,
-        0, 0, 2, 0, 0, 0, 0, 0
+        0, 0, 1, 0, 0, 0, 0, 0
     )
     await asyncio.sleep(1)
     await takeoff()
@@ -74,7 +74,7 @@ async def takeoff():
         the_connection.target_system,
         the_connection.target_component,
         mavutil.mavlink.MAV_CMD_NAV_TAKEOFF,
-        0, 0, 0, 0, 0, 0, 0, 10
+        0, 0, 0, 0, 0, 0, 0, 1
     )
     await asyncio.sleep(10)
     await move_to_local1()
@@ -83,7 +83,7 @@ async def move_to_local1():
     print("Moving to LOCAL1...")
     the_connection.mav.send(mavutil.mavlink.MAVLink_set_position_target_local_ned_message(
         10, the_connection.target_system, the_connection.target_component,
-        mavutil.mavlink.MAV_FRAME_LOCAL_NED, int(0b100111111000), 40, 0, -10, 
+        mavutil.mavlink.MAV_FRAME_LOCAL_NED, int(0b100111111000), 2, 0, -1, 
         0, 0, 0, 0, 0, 0, 0, 0
     ))
     await asyncio.sleep(20)
@@ -93,7 +93,7 @@ async def move_to_local2():
     print("Moving to LOCAL2...")
     the_connection.mav.send(mavutil.mavlink.MAVLink_set_position_target_local_ned_message(
         10, the_connection.target_system, the_connection.target_component,
-        mavutil.mavlink.MAV_FRAME_LOCAL_NED, int(0b100111111000), 40, 40, -10,
+        mavutil.mavlink.MAV_FRAME_LOCAL_NED, int(0b100111111000), 2, 2, -1,
         0, 0, 0, 0, 0, 0, 0, 0
     ))
     await asyncio.sleep(30)
@@ -103,7 +103,7 @@ async def move_to_local3():
     print("Moving to LOCAL3...")
     the_connection.mav.send(mavutil.mavlink.MAVLink_set_position_target_local_ned_message(
         10, the_connection.target_system, the_connection.target_component,
-        mavutil.mavlink.MAV_FRAME_LOCAL_NED, int(0b100111111000), 0, 40, -10,
+        mavutil.mavlink.MAV_FRAME_LOCAL_NED, int(0b100111111000), 0, 2, -1,
         0, 0, 0, 0, 0, 0, 0, 0
     ))
     await asyncio.sleep(40)
@@ -113,7 +113,7 @@ async def move_to_local0():
     print("Moving to LOCAL0...")
     the_connection.mav.send(mavutil.mavlink.MAVLink_set_position_target_local_ned_message(
         10, the_connection.target_system, the_connection.target_component,
-        mavutil.mavlink.MAV_FRAME_LOCAL_NED, int(0b100111111000), 0, 0, -10,
+        mavutil.mavlink.MAV_FRAME_LOCAL_NED, int(0b100111111000), 0, 0, -1,
         0, 0, 0, 0, 0, 0, 0, 0
     ))
     await asyncio.sleep(50)
@@ -125,7 +125,7 @@ async def land_drone():
         the_connection.target_system,
         the_connection.target_component,
         mavutil.mavlink.MAV_CMD_NAV_LAND,
-        0, 0, 0, 0, 0, 0, 0, -10
+        0, 0, 0, 0, 0, 0, 0, -1
     )
 
 async def main():
