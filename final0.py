@@ -4,7 +4,7 @@ import threading
 import time
 
 # Start a connection listening on a UDP port
-the_connection = mavutil.mavlink_connection('127.0.0.1:14550')
+the_connection = mavutil.mavlink_connection('/dev/serial0', baud=57600)
 
 #udpin:localhost:14550
 
